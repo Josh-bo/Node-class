@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row w-25 text-center mx-auto mt-5 pt-5 border rounded pb-3">
+            <div class="col-sm-12 ">
+                <div>Welcome, This is the dashboard <br> 💯💖👊👏💋</div>
+                <%= food %>
+                <% if (food == "Pounded yam") { %>
+                    <div>Omo ounje</div>
+                <% }else if (food == "Indomie"){ %>
+                    <div>Na boty you be oo</div>
+                <% }else if (food == "spag"){ %>
+                    <div>Omo you get money oo</div>
+                    <% }else { %>
+                        <div>Sapa things</div>
+                   <% } %>    
+                <div id="btnme">
+                    <button class="btn btn-danger mt-4 w-100" onclick="lod()"><span id="lodd">BACK</span> </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const lod = () => {
+            btnme.innerHTML = `
+            <button class="btn btn-success mt-4 w-100"><span> <<< Loading.....</span> </button>
+            `
+            setTimeout(() => {
+                btnme.innerHTML = `
+            <button class="btn btn-danger mt-4 w-100"><span>BACK</span> </button>
+            `
+            window.location = "signIn"
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
