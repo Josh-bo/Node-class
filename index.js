@@ -21,6 +21,25 @@ const app = express();
 const ejs = require('ejs');
 const res = require("express/lib/response");
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const URI = 'mongodb+srv://JOSHBAM:OLAYINKA1@cluster0.whles85.mongodb.net/firstday?retryWrites=true&w=majority'
+
+mongoose.connect(URI)
+.then(() => {
+    console.log('Database connected');
+})
+.catch((err) => {
+    console.log(err);
+})
+
+let userSchema = {
+    firstname:{type:String, required:true},
+    lastname:{type:String, required:true},
+    email:{type:String, required:true, unique:true},
+    password:{type:String, required:true, unique:true},
+}
+
+let userModel = mongoose.model('users_collection', userSchema)
 
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -42,11 +61,21 @@ app.get("/josh", (req,res) => {
 })
 
 app.get("/signUp", (req,res) => {
-    res.render("signUp")
+    res.render("signUp",{message:""})
 })
 app.post("/signUp",(req,res) => {
-    // console.log("E don post");
     console.log(req.body);
+    let form = new userModel(req.body);
+    form.save()
+    .then(()=>{
+        console.log("Database ti gbaa wole")
+        res.render("signUp", {message :'Sign up successfully'})
+    })
+
+    .catch((err) => {
+        console.log(err);
+        res.render("signUp", {message : 'Failed to submit'})
+    })
 })
 app.get("/signIn", (req,res) => {
     res.render("signIn")
