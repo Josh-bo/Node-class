@@ -1,47 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Dash</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <div class="row w-25 text-center mx-auto mt-5 pt-5 border rounded pb-3">
-            <div class="col-sm-12 ">
-                <div>Welcome, This is the dashboard <br> 💯💖👊👏💋</div>
-                <%= food %>
-                <% if (food == "Pounded yam") { %>
-                    <div>Omo ounje</div>
-                <% }else if (food == "Indomie"){ %>
-                    <div>Na boty you be oo</div>
-                <% }else if (food == "spag"){ %>
-                    <div>Omo you get money oo</div>
-                    <% }else { %>
-                        <div>Sapa things</div>
-                   <% } %>    
-                <div id="btnme">
-                    <button class="btn btn-danger mt-4 w-100" onclick="lod()"><span id="lodd">BACK</span> </button>
-                </div>
-            </div>
-        </div>
+  <div class="container text-center mt-4">
+    <h1>Users List</h1>
+    <table class="table table-striped table-hover table-bordered">
+       <tr>
+         <th>S/N</th>
+         <th>FIRSTNAME</th>
+         <th>LASTNAME</th>
+         <th>E-MAIL</th>
+         <th>PASSWORD</th>
+         <th>ACTION</th>
+       </tr>
 
-    </div>
+       <% for( let index = 0; index < response.length; index++ ) { %>
+       <tr>
+          <td><%= index+1 %></td>
+          <td><%= response[index].firstname %></td>
+          <td><%= response[index].lastname %></td>
+          <td><%= response[index].email %></td>
+          <td><%= response[index].password %></td>
+          <td>
+            <button class="btn btn-primary mt-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+              </svg>
+            </button>
 
-    <script>
-        const lod = () => {
-            btnme.innerHTML = `
-            <button class="btn btn-success mt-4 w-100"><span> <<< Loading.....</span> </button>
-            `
-            setTimeout(() => {
-                btnme.innerHTML = `
-            <button class="btn btn-danger mt-4 w-100"><span>BACK</span> </button>
-            `
-            window.location = "signIn"
-            }, 2000);
-        }
-    </script>
+            <button class="btn btn-danger mt-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+              </svg>
+            </button>
+          </td>
+         
+        </tr>
+         <% } %>
+    </table>  
+  </div>
+
+  <div class="text-end container">
+    <a href="signIn">
+      <button class="btn btn-danger me-5">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+        </svg>
+      </button>
+    </a>
+  </div>
+  <script src="/bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
