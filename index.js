@@ -1,21 +1,3 @@
-// const { response } = require('express');
-// const { request } = require('express');
-// const express = require('express');
-// const app = express();
-
-// app.get("/",(request,response) => {
-//     console.log("Request made")
-//     // response.send("Hello world")
-//     response.send([{name:"Joshua", club:"Arsenal"}])
-// })
-// app.listen(5005,() => {
-//     console.log("Your server yaff start ooo");
-// }) 
-
-// var myName = "Joshua"
-// console.log(myName);
-
-
 const express = require("express");
 const app = express();
 const ejs = require('ejs');
@@ -118,3 +100,14 @@ app.listen("4607", () => {
     console.log("server has started on port 4607");
 })
 
+app.post('/delete', (req,res) => {
+    userModel.findOneAndDelete({email:req.body.userEmail})
+    .then((response) => {
+        console.log(response);
+        res.redirect("dash");
+        console.log("deleted successfully");
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+})
